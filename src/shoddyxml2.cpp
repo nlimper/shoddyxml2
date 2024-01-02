@@ -20,10 +20,10 @@ void shoddyxml::resetStatus() {
 
   for (int i = 0; i < numAttributes; i++) {
     if (attributes[i].name) {
-      free(attributes[i].name);
+      //free(attributes[i].name);
     }
     if (attributes[i].attValue) {
-      free(attributes[i].attValue);
+      //free(attributes[i].attValue);
     }
   }
   numAttributes = 0;
@@ -230,14 +230,14 @@ void shoddyxml::parseInSTag(int c) { // <
       attValue = (char *)realloc(attValue, ++attValueLength);
       if (c == '\"') {
         attValue[attValueLength - 1] = 0;
-        attributes[numAttributes].name = strdup(name);
-        attributes[numAttributes].attValue = strdup(attValue);
+        // attributes[numAttributes].name = strdup(name);
+        // attributes[numAttributes].attValue = strdup(attValue);
         numAttributes++;
-        free(name);
+        // free(name);
         name = 0;
         nameLength = 1;
 
-        free(attValue);
+        // free(attValue);
         attValue = 0;
         attValueLength = 0;
 
