@@ -129,12 +129,12 @@ void rssClass::foundETag(char *s) {
 	if (itemNum < maxItemNum) {
 		if ((itemDepth == 1) && (strcmp(s, "title") == 0)) {
 			titleData[itemNum][bufTitlePos] = '\0';
-			Serial.println("title: " + String(titleData[itemNum]);
+			Serial.println("title: " + String(titleData[itemNum]));
 			bufTitlePos = 0;
 		}
 		if ((itemDepth == 2) && (strcmp(s, "description") == 0)) {
 			descData[itemNum][bufDescPos] = '\0';
-			Serial.println("desc: " + String(descData[itemNum]);
+			Serial.println("desc: " + String(descData[itemNum]));
 			bufDescPos = 0;
 		}
 		
