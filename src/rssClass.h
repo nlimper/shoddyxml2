@@ -7,10 +7,11 @@ class rssClass: public shoddyxml {
   public:
     rssClass();
 
-    char **itemData;
+    char **titleData;
+    char **descData;
     int itemNum;
 
-    int getArticles(const char *url, const char *targetTag, const int maxItemDataSize, const int maxItemNum, const char *rootCA = NULL);
+    int getArticles(const char *url, const int maxTitleDataSize, const int maxDescDataSize, const int maxItemNum, const char *rootCA = NULL);
     void clearItemData();
 
   private:
@@ -26,12 +27,13 @@ class rssClass: public shoddyxml {
 
     Client *client;
 
-    int bufPos;
+    int bufTitlePos;
+    int bufDescPos;
     int itemDepth;
     int lastTagMatches;
-    char *targetTag;
     int maxItemNum;
-    int maxItemDataSize;
+    int maxTitleDataSize;
+    int maxDescDataSize;
     
     void resetStatus();
     void skipHeaders();

@@ -5,10 +5,10 @@ const char *ssid = "YOURSSID";
 const char *password = "YOURPASSWORD";
 
 const char *url = "http://rss.cnn.com/rss/edition.rss";
-const char *tag = "title";
 
 rssClass reader;
-const int rssArticleSize = 128;
+const int rssTitleSize = 128;
+const int rssDescSize = 500;
 const int rssNumArticle = 20;
 const int rssGetInterval = 1800;
 
@@ -35,9 +35,10 @@ void loop() {
           timeInfo.tm_hour, timeInfo.tm_min);
   Serial.printf("\n%s\n", header);
 
-  int n = reader.getArticles(url, tag, rssArticleSize, rssNumArticle);
+  int n = reader.getArticles(url, rssTitleSize, rssDescSize, rssNumArticle);
   for (int i = 0; i < n; i++) {
-    Serial.printf("%2d: %s\n", i, reader.itemData[i]);
+    Serial.printf("%2d: %s\n", i, reader.titleData[i]);
+  	Serial.printf("%2d: %s\n", i, reader.descData[i]);
   }
   delay(rssGetInterval*1000);
 }
