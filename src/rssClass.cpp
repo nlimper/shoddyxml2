@@ -15,15 +15,12 @@ int rssClass::getArticles(const char *url, const int maxTitleDataSize, const int
 	this->maxItemNum = maxItemNum;
 
 	titleData = new char *[maxItemNum];
-	for (int i = 0; i < maxItemNum; i++) {
-		titleData[i] = new char[maxTitleDataSize];
-	}
-	this->maxTitleDataSize = maxTitleDataSize;
-
 	descData = new char *[maxItemNum];
 	for (int i = 0; i < maxItemNum; i++) {
+		titleData[i] = new char[maxTitleDataSize];
 		descData[i] = new char[maxDescDataSize];
 	}
+	this->maxTitleDataSize = maxTitleDataSize;
 	this->maxDescDataSize = maxDescDataSize;
 
 	sscanf(url, "%7[^:]://%31[^:/]:%6d/", protocol, server, &port);
@@ -130,15 +127,17 @@ void rssClass::foundSTag(char *s, int numAttributes, attribute_t attributes[]) {
 void rssClass::foundETag(char *s) {
 	if (itemNum < maxItemNum) {
 		if ((itemDepth == 1) && (strcmp(s, "title") == 0)) {
-			titleData[itemNum++][bufTitlePos] = '\0';
+			titleData[itemNum][bufTitlePos] = '\0';
 			bufTitlePos = 0;
 		}
 		if ((itemDepth == 2) && (strcmp(s, "description") == 0)) {
-			descData[itemNum++][bufDescPos] = '\0';
+			descData[itemNum][bufDescPos] = '\0';
 			bufDescPos = 0;
 		}
+		
 		if (strcmp(s, "item") == 0) {
 			itemDepth--;
+			itemNum++;
 		}
 	}
 }
