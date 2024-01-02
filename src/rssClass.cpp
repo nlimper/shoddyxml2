@@ -125,19 +125,22 @@ void rssClass::foundSTag(char *s, int numAttributes, attribute_t attributes[]) {
 }
 
 void rssClass::foundETag(char *s) {
+	Serial.println("end item " + String(s));
 	if (itemNum < maxItemNum) {
 		if ((itemDepth == 1) && (strcmp(s, "title") == 0)) {
 			titleData[itemNum][bufTitlePos] = '\0';
+			Serial.println("title: " + String(titleData[itemNum]);
 			bufTitlePos = 0;
 		}
 		if ((itemDepth == 2) && (strcmp(s, "description") == 0)) {
 			descData[itemNum][bufDescPos] = '\0';
+			Serial.println("desc: " + String(descData[itemNum]);
 			bufDescPos = 0;
 		}
 		
 		if (strcmp(s, "item") == 0) {
 			itemDepth--;
-			itemNum++;
+			//itemNum++;
 		}
 	}
 }
