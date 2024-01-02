@@ -120,7 +120,7 @@ void rssClass::foundSTag(char *s, int numAttributes, attribute_t attributes[]) {
 
 	if (strcmp(s, "title") == 0) {
 		lastTagMatches = 1;
-	} else if (strcmp(s, "desc") == 0) {
+	} else if (strcmp(s, "description") == 0) {
 		lastTagMatches = 2;
 	} else {
 		lastTagMatches = 0;
@@ -133,7 +133,7 @@ void rssClass::foundETag(char *s) {
 			titleData[itemNum++][bufTitlePos] = '\0';
 			bufTitlePos = 0;
 		}
-		if ((itemDepth == 2) && (strcmp(s, "desc") == 0)) {
+		if ((itemDepth == 2) && (strcmp(s, "description") == 0)) {
 			descData[itemNum++][bufDescPos] = '\0';
 			bufDescPos = 0;
 		}
