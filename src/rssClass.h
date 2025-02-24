@@ -1,3 +1,4 @@
+#include <WiFiClient.h>
 #include <WiFiClientSecure.h>
 #include <shoddyxml2.h>
 
